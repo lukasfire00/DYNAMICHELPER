@@ -1,5 +1,5 @@
 // Define o título da página
-var pageTitle = "Faça Contato";
+var pageTitle = "Faça seu pedido";
 
 $(document).ready(runPage);
 
@@ -8,13 +8,12 @@ function runPage() {
 
   // Quando o formulário for enviado, executa 'sendForm'
   // (ERRO) $(document).on("submit", "#contact", sendForm); 
-  $('#contact').submit(sendForm);
+  $('#newservice').submit(sendForm);
 
   // Se alguém faz login/logout
   firebase.auth().onAuthStateChanged((userData) => {
-    if (userData) {
-      $("#contact-name").val(userData.displayName);
-      $("#contact-email").val(userData.email);
+    if (!userData) {
+      loadPage('login');
     }
   });
 }
@@ -22,29 +21,29 @@ function runPage() {
 // Processa envio do formulário de contatos
 function sendForm() {
   // Obtém e sanitiza os campos preenchidos
-  var contact = {
-    name: sanitizeString($("#contact-name").val()),
-    email: sanitizeString($("#contact-email").val()),
-    subject: sanitizeString($("#contact-subject").val()),
-    message: sanitizeString($("#contact-message").val()),
+  var newServices = {
+    title: sanitizeString($("#newservice-title").val()),
+    intro: sanitizeString($("#newservice-intro").val()),
+    description: sanitizeString($("#newservice-description").val()),
     date: getSystemDate(),
+    uid: user.uid,
     status: "enviado",
   };
 
   // Salva dados no banco de dados
-  db.collection("contacts")
-    .add(contact)
+  db.collection("services")
+    .add(newServices)
 
     // Se deu certo, exibe feedback
     .then(function (docRef) {
-      var msg = `<blockquote>Seu contato foi enviado com sucesso.</blockquote>`;
-      feedback(contact.name, msg);
+      var msg = `<blockquote>Seu anúncio foi cadastrado com sucesso.</blockquote>`;
+      feedback (msg);
     })
 
     // Se não deu certo, exibe mensagem de erro
     .catch(function (error) {
-      var msg = `<p class="danger">Ocorreu uma falha que impediu o envio do seu contato.</p><p class="danger">A equipe do site já foi avisada sobre a falha.</p><p>Por favor, tente mais tarde.</p><p><small>${error}</small></p>`;
-      feedback(contact.name, msg);
+      var msg = `<p class="danger">Ocorreu uma falha que impediu o cadastro do seu anúncio.</p><p class="danger">A equipe do site já foi avisada sobre a falha.</p><p>Por favor, tente mais tarde.</p><p><small>${error}</small></p>`;
+      feedback(newServices.name, msg);
     });
 
   // Sai sem fazer mais nada
@@ -52,10 +51,9 @@ function sendForm() {
 }
 
 // Exibe mensagem de feedback
-function feedback(name, msg) {
-  var names = name.split(" "); // Obtém somente primeiro nome do remetente
-  var out = `<h4>Olá ${names[0]}!</h4>${msg}<p><em>Obrigado...</em></p>`; // Gera mensagem
+function feedback(msg) {
+   var out = `<h4>Olá!</h4>${msg}<p><em>Obrigado...</em></p>`; // Gera mensagem
   $("#feedback").html(out); // Coloca mensagem na view
-  $("#contact").hide("fast"); // Oculta formulário
+  $("#newservice").hide("fast"); // Oculta formulário
   $("#feedback").show("fast"); // Exibe mensagem
 }

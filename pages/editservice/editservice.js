@@ -1,5 +1,5 @@
 // Define o título da página
-var pageTitle = "Faça Contato";
+var pageTitle = "Faça seu pedido";
 
 $(document).ready(runPage);
 
@@ -8,13 +8,13 @@ function runPage() {
 
   // Quando o formulário for enviado, executa 'sendForm'
   // (ERRO) $(document).on("submit", "#contact", sendForm); 
-  $('#contact').submit(sendForm);
+  $('#newservice').submit(sendForm);
 
   // Se alguém faz login/logout
   firebase.auth().onAuthStateChanged((userData) => {
     if (userData) {
-      $("#contact-name").val(userData.displayName);
-      $("#contact-email").val(userData.email);
+      $("#newservice-title").val(userData.displayTitle);
+      $("#newservice-subject").val(userData.subject);
     }
   });
 }
@@ -23,9 +23,8 @@ function runPage() {
 function sendForm() {
   // Obtém e sanitiza os campos preenchidos
   var contact = {
-    name: sanitizeString($("#contact-name").val()),
-    email: sanitizeString($("#contact-email").val()),
-    subject: sanitizeString($("#contact-subject").val()),
+    title: sanitizeString($("#newservice-title").val()),
+    subject: sanitizeString($("#newservice-subject").val()),
     message: sanitizeString($("#contact-message").val()),
     date: getSystemDate(),
     status: "enviado",

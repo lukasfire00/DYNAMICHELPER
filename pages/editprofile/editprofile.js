@@ -1,5 +1,5 @@
 // Define o título da página
-var pageTitle = "Faça Contato";
+var pageTitle = "Novo usuário";
 
 $(document).ready(runPage);
 
@@ -8,13 +8,14 @@ function runPage() {
 
   // Quando o formulário for enviado, executa 'sendForm'
   // (ERRO) $(document).on("submit", "#contact", sendForm); 
-  $('#contact').submit(sendForm);
+  $('#newuser').submit(sendForm);
 
   // Se alguém faz login/logout
   firebase.auth().onAuthStateChanged((userData) => {
     if (userData) {
-      $("#contact-name").val(userData.displayName);
-      $("#contact-email").val(userData.email);
+      $("#newuser-name").val(userData.displayName);
+      $("#newuser-email").val(userData.email);
+      $("#newuser-avatar").val(userData.photoURL);
     }
   });
 }
@@ -23,10 +24,10 @@ function runPage() {
 function sendForm() {
   // Obtém e sanitiza os campos preenchidos
   var contact = {
-    name: sanitizeString($("#contact-name").val()),
-    email: sanitizeString($("#contact-email").val()),
-    subject: sanitizeString($("#contact-subject").val()),
-    message: sanitizeString($("#contact-message").val()),
+    name: sanitizeString($("#newuser-name").val()),
+    email: sanitizeString($("#newuser-email").val()),
+    phone: sanitizeString($("#newuser-phone").val()),
+    whatsapp: sanitizeString($("#newuser-whatsapp").val()),
     date: getSystemDate(),
     status: "enviado",
   };

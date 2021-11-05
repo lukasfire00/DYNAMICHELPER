@@ -2,32 +2,32 @@
 
     <h2>Faça seu pedido de ajuda</h2>
 
-    <form method="POST" name="contact" id="contact">
+    <form method="POST" name="editservice" id="editservice">
 
         <p>Preencha os campos abaixo para realizar seu pedido.</p>
 
         <p class="center small red">* Todos os campos são obrigatórios.</p>
 
-        <input type="hidden" name="newservice-send" id="newservice-send" value="Ok">
+        <input type="hidden" name="editservice-send" id="editservice-send" value="Ok">
 
         <p>
-            <label for="newservice-title">Titulo:</label>
-            <input type="text" name="newservice-title" id="newservice-title" required minlength="3" class="valid">
-        </p>
-       
-        <p>
-            <label for="newservice-subject">Resumo:</label>
-            <input type="text" name="newservice-subject" id="newservice-subject" required minlength="3" class="valid">
+            <label for="editservice-title">Titulo:</label>
+            <input type="text" name="editservice-title" id="editservice-title" required minlength="3" class="valid">
         </p>
 
         <p>
-            <label for="newservice-message">Descrição:</label>
-            <textarea name="newservice-message" id="newservice-message" required minlength="5" class="valid"></textarea>
+            <label for="editservice-subject">Resumo:</label>
+            <input type="text" name="editservice-subject" id="editservice-subject" required minlength="3" class="valid">
         </p>
 
         <p>
-            <label for="newservice-submit"></label>
-            <button type="submit" name="newservice-submit" id="newservice-submit">Enviar</button>
+            <label for="editservice-message">Descrição:</label>
+            <textarea name="editservice-message" id="editservice-message" required minlength="5" class="valid"></textarea>
+        </p>
+
+        <p>
+            <label for="editservice-submit"></label>
+            <button type="submit" name="editservice-submit" id="editservice-submit">Enviar</button>
             <small class="grey">Suporta somente texto.</small>
         </p>
 
