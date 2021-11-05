@@ -1,0 +1,16 @@
+Coleção Cadastro 
+Data:
+nome:
+Telefone:
+E-mail:
+whatsapp:
+Perfil:
+Avatar:
+Status:
+
+Coleção Serviços
+Data:
+Titulo:
+Resumo:
+Descrição:
+Status:
