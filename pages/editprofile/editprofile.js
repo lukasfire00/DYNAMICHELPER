@@ -8,14 +8,38 @@ function runPage() {
 
   // Quando o formulário for enviado, executa 'sendForm'
   // (ERRO) $(document).on("submit", "#contact", sendForm); 
-  $('#newuser').submit(sendForm);
+  $('#editprofile').submit(sendForm);
 
-  // Se alguém faz login/logout
   firebase.auth().onAuthStateChanged((userData) => {
     if (userData) {
-      $("#newuser-name").val(userData.displayName);
-      $("#newuser-email").val(userData.email);
-      $("#newuser-avatar").val(userData.photoURL);
+      $("#editprofile-name").val(userData.displayName);
+      $("#editprofile-email").val(userData.email);
+      $("#editprofile-avatar").val(userData.photoURL);
+
+      db.collection("users").doc(userData.uid).get().then((doc) => {
+        if (doc.exists) {
+          // Cadastro encontrado
+          //console.log("Document data:", doc.data());
+
+          form = doc.data();
+        
+        $('#editprofile-name').val(form.name);
+        $('#editprofile-email').val(form.email);
+        $('#editprofile-phone').val(form.phone);
+        $('#editprofile-whatsapp').val(form.whatsapp);
+        $('#editprofile-profile').val(form.profile);
+          
+        } else {
+          // Cadastro não encontrado
+          // console.log("No such document!");
+          loadPage('newuser');
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
+
+    } else {
+      loadPage('login');
     }
   });
 }
@@ -23,29 +47,36 @@ function runPage() {
 // Processa envio do formulário de contatos
 function sendForm() {
   // Obtém e sanitiza os campos preenchidos
-  var contact = {
-    name: sanitizeString($("#newuser-name").val()),
-    email: sanitizeString($("#newuser-email").val()),
-    phone: sanitizeString($("#newuser-phone").val()),
-    whatsapp: sanitizeString($("#newuser-whatsapp").val()),
-    date: getSystemDate(),
-    status: "enviado",
+  var editProfile = {
+    name: sanitizeString($("#editprofile-name").val()),
+    email: sanitizeString($("#editprofile-email").val()),
+    phone: sanitizeString($("#editprofile-phone").val()),
+    whatsapp: sanitizeString($("#editprofile-whatsapp").val()),
+    profile: sanitizeString($("#editprofile-profile").val()),
+    // date: getSystemDate(),
+    // status: "ativo",
+    // uid: userId
   };
 
+  // Obtém Id do user
+  userId = JSON.parse(getCookie('userData')).uid;
+
+  console.log('uid: ', userId);
+
   // Salva dados no banco de dados
-  db.collection("contacts")
-    .add(contact)
+  db.collection("users").doc(userId)
+    .update(editProfile)
 
     // Se deu certo, exibe feedback
     .then(function (docRef) {
       var msg = `<blockquote>Seu contato foi enviado com sucesso.</blockquote>`;
-      feedback(contact.name, msg);
+      feedback(editProfile.name, msg);
     })
 
     // Se não deu certo, exibe mensagem de erro
     .catch(function (error) {
       var msg = `<p class="danger">Ocorreu uma falha que impediu o envio do seu contato.</p><p class="danger">A equipe do site já foi avisada sobre a falha.</p><p>Por favor, tente mais tarde.</p><p><small>${error}</small></p>`;
-      feedback(contact.name, msg);
+      feedback(editProfile.name, msg);
     });
 
   // Sai sem fazer mais nada

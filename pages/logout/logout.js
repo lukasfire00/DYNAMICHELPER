@@ -9,9 +9,10 @@ function runPage() {
 
   $(document).on("click", "#logout", logout);
 
-  firebase.auth().onAuthStateChanged((userData) => {
-    if (!userData) {
-      loadPage("home");
-    }
-  });
+  // firebase.auth().onAuthStateChanged((userData) => {
+  //   if (!userData) {
+  //     loadPage("home");
+  //   }
+  // });
 }
+

@@ -16,10 +16,13 @@ function runPage() {
       $("#newuser-name").val(userData.displayName);
       $("#newuser-email").val(userData.email);
       $("#newuser-avatar").val(userData.photoURL);
+      $('#userPhoto').html(`<a href="https://account.google.com/" target="_blank"><img src="${userData.photoURL}" alt="${userData.displayName}"></a>`);
+      userId = userData.uid;
     } else {
       loadPage('login');
     } 
   });
+    
 }
 
 // Processa envio do formulário de contatos
@@ -27,18 +30,19 @@ function sendForm() {
   // Obtém e sanitiza os campos preenchidos
   var newUser = {
     name: sanitizeString($("#newuser-name").val()),
-    avatar: sanitizeString($("#newuser-avatar").val()),
+    // avatar: sanitizeString($("#newuser-avatar").val()),
     email: sanitizeString($("#newuser-email").val()),
     phone: sanitizeString($("#newuser-phone").val()),
     whatsapp: sanitizeString($("#newuser-whatsapp").val()),
     profile: sanitizeString($("#newuser-profile").val()),
     date: getSystemDate(),
     status: "ativo",
-  };
+    uid: userId
+  };  
 
   // Salva dados no banco de dados
   db.collection("users")
-    .add(newUser)
+    .doc(userId).set(newUser)
 
     // Se deu certo, exibe feedback
     .then(function (docRef) {

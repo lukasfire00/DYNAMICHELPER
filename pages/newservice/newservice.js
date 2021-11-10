@@ -10,12 +10,6 @@ function runPage() {
   // (ERRO) $(document).on("submit", "#contact", sendForm); 
   $('#newservice').submit(sendForm);
 
-  // Se alguém faz login/logout
-  firebase.auth().onAuthStateChanged((userData) => {
-    if (!userData) {
-      loadPage('login');
-    }
-  });
 }
 
 // Processa envio do formulário de contatos

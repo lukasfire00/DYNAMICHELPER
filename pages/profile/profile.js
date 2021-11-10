@@ -12,14 +12,18 @@ function runPage() {
     firebase.auth().onAuthStateChanged((userData) => {
         if (userData) {
 
-            $('#userName').html(user.displayName);
+            
+
+            $('#userName').html(userData.displayName);
 
             var uProfile = `
 <div class="card card-table">
-    <div class="card-img"><img src="${user.photoURL}" alt="${user.displayName}"></div>
+<h3 class="card-title">Perfil do Google</h3>
+
+    <div class="card-img"><img src="${userData.photoURL}" alt="${userData.displayName}"></div>
     <div class="card-content">
-        <h3>${user.displayName}</h3>
-        <h4>${user.email}</h4>
+        <h3>${userData.displayName}</h3>
+        <h4>${userData.email}</h4>
         <p>
             <a class="btn primary block" href="https://myaccount.google.com/profile" target="_blank">
                 <i class="fas fa-address-card fa-fw"></i> Ver / Editar perfil
@@ -34,6 +38,26 @@ function runPage() {
 </div>`;
 
             $('#userProfile').html(uProfile);
+
+            db.collection("users").doc(userData.uid).get().then((doc) => {
+                if (doc.exists) {
+                  // Cadastro encontrado
+                  console.log("Document data:", doc.data());
+                
+                  $('#userAppProfile').html(`
+                  
+                  <a href="editprofile">Editar perfil</a>
+                  
+                  `)
+                  
+                } else {
+                  // Cadastro não encontrado
+                  // console.log("No such document!");
+                  loadPage('newuser');
+                }
+              }).catch((error) => {
+                console.log("Error getting document:", error);
+              });
 
         } else {
             loadPage('home');
