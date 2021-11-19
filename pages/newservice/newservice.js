@@ -21,7 +21,7 @@ function sendForm() {
     description: sanitizeString($("#newservice-description").val()),
     date: getSystemDate(),
     uid: user.uid,
-    status: "enviado",
+    status: "ativo",
   };
 
   // Salva dados no banco de dados

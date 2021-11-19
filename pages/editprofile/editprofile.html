@@ -1,10 +1,10 @@
 <article>
 
-    <h2>Cadastre-se </h2>
+    <h2>Edite seu Perfil </h2>
 
     <form method="POST" name="editprofile" id="editprofile">
 
-        <p>Preencha os campos abaixo para ter acesso completo ao nosso site.</p>
+        <p>Estamos sempre mudando e evolouindo .</p>
 
         <p class="center small red">* Todos os campos são obrigatórios.</p>
 
@@ -22,12 +22,27 @@
 
         <p>
             <label for="editprofile-phone">Telefone:</label>
-            <input type="text" name="editprofile-phone" id="editprofile-phone" required minlength="3" class="valid">
+            <input type="text" name="editprofile-phone" id="editprofile-phone" required minlength="11" class="valid" onkeypress="mascara(this, telefone)" maxlength="15">
         </p>
 
         <p>
             <label for="editprofile-whatsapp">Whatsapp:</label>
-            <input type="text" name="editprofile-whatsapp" id="editprofile-whatsapp" required minlength="3" class="valid">
+            <input type="text" name="editprofile-whatsapp" id="editprofile-whatsapp" required minlength="11" class="valid" onkeypress="mascara(this, telefone)" maxlength="15">
+        </p>
+
+        <p>
+            <label for="editprofile-zip">CEP:</label>
+            <input type="text" name="editprofile-zip" id="editprofile-zip" required minlength="9" class="valid" onkeypress="mascara(this, cep)" maxlength="9">
+        </p>
+
+        <p>
+            <label for="editprofile-state">Estado:</label>
+            <input type="text" name="editprofile-state" id="editprofile-state" required minlength="3" class="valid">
+        </p>
+
+        <p>
+            <label for="editprofile-city">Cidade:</label>
+            <input type="text" name="editprofile-city" id="editprofile-city" required minlength="3" class="valid">
         </p>
 
         <p>

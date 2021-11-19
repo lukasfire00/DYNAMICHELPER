@@ -22,7 +22,7 @@ function runPage() {
       loadPage('login');
     } 
   });
-    
+
 }
 
 // Processa envio do formulário de contatos
@@ -35,6 +35,9 @@ function sendForm() {
     phone: sanitizeString($("#newuser-phone").val()),
     whatsapp: sanitizeString($("#newuser-whatsapp").val()),
     profile: sanitizeString($("#newuser-profile").val()),
+    zip: sanitizeString($("#newuser-zip").val()),
+    state: sanitizeString($("#newuser-state").val()),
+    city: sanitizeString($("#newuser-city").val()),
     date: getSystemDate(),
     status: "ativo",
     uid: userId
@@ -68,3 +71,4 @@ function feedback(name, msg) {
   $("#newuser").hide("fast"); // Oculta formulário
   $("#feedback").show("fast"); // Exibe mensagem
 }
+

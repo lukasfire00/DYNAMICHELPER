@@ -1,5 +1,5 @@
 // Define o título da página
-var pageTitle = "Novo usuário";
+var pageTitle = "Editor de Perfil";
 
 $(document).ready(runPage);
 
@@ -27,12 +27,15 @@ function runPage() {
         $('#editprofile-email').val(form.email);
         $('#editprofile-phone').val(form.phone);
         $('#editprofile-whatsapp').val(form.whatsapp);
+        $('#editprofile-zip').val(form.zip);
+        $('#editprofile-state').val(form.state);
+        $('#editprofile-city').val(form.city);
         $('#editprofile-profile').val(form.profile);
           
         } else {
           // Cadastro não encontrado
           // console.log("No such document!");
-          loadPage('newuser');
+          loadPage('editprofile');
         }
       }).catch((error) => {
         console.log("Error getting document:", error);
@@ -52,6 +55,9 @@ function sendForm() {
     email: sanitizeString($("#editprofile-email").val()),
     phone: sanitizeString($("#editprofile-phone").val()),
     whatsapp: sanitizeString($("#editprofile-whatsapp").val()),
+    zip: sanitizeString($("#editprofile-zip").val()),
+    state: sanitizeString($("#editprofile-state").val()),
+    city: sanitizeString($("#editprofile-city").val()),
     profile: sanitizeString($("#editprofile-profile").val()),
     // date: getSystemDate(),
     // status: "ativo",
@@ -61,21 +67,19 @@ function sendForm() {
   // Obtém Id do user
   userId = JSON.parse(getCookie('userData')).uid;
 
-  console.log('uid: ', userId);
-
   // Salva dados no banco de dados
   db.collection("users").doc(userId)
     .update(editProfile)
 
     // Se deu certo, exibe feedback
     .then(function (docRef) {
-      var msg = `<blockquote>Seu contato foi enviado com sucesso.</blockquote>`;
+      var msg = `<blockquote>Seu Perfil foi alterado com sucesso.</blockquote>`;
       feedback(editProfile.name, msg);
     })
 
     // Se não deu certo, exibe mensagem de erro
     .catch(function (error) {
-      var msg = `<p class="danger">Ocorreu uma falha que impediu o envio do seu contato.</p><p class="danger">A equipe do site já foi avisada sobre a falha.</p><p>Por favor, tente mais tarde.</p><p><small>${error}</small></p>`;
+      var msg = `<p class="danger">Ocorreu uma falha que impediu a alteração do seu Perfil.</p><p class="danger">A equipe do site já foi avisada sobre a falha.</p><p>Por favor, tente mais tarde.</p><p><small>${error}</small></p>`;
       feedback(editProfile.name, msg);
     });
 
@@ -88,6 +92,6 @@ function feedback(name, msg) {
   var names = name.split(" "); // Obtém somente primeiro nome do remetente
   var out = `<h4>Olá ${names[0]}!</h4>${msg}<p><em>Obrigado...</em></p>`; // Gera mensagem
   $("#feedback").html(out); // Coloca mensagem na view
-  $("#contact").hide("fast"); // Oculta formulário
+  $("#editprofile").hide("fast"); // Oculta formulário
   $("#feedback").show("fast"); // Exibe mensagem
 }

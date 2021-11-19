@@ -7,12 +7,6 @@ function runPage() {
   // Altera o título da página
   setTitle(pageTitle);
 
-  $(document).on("click", "#logout", logout);
-
-  // firebase.auth().onAuthStateChanged((userData) => {
-  //   if (!userData) {
-  //     loadPage("home");
-  //   }
-  // });
+  $('#logout').click(logout);
 }
 

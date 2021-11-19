@@ -1,21 +1,19 @@
 // Define o título da página
 var pageTitle = "Editando seu pedido";
 
-var id = '';
-
 $(document).ready(runPage);
 
 function runPage() {
   setTitle(pageTitle); // Altera o título da página
 
   // Obtém o ID do artigo da URL
-   id = location.search.replace('?', '');
+  const id = location.search.replace('?', '');
 
   console.log('servico:', id);
 
   // Quando o formulário for enviado, executa 'sendForm'
   // (ERRO) $(document).on("submit", "#contact", sendForm); 
-  $('#editservice').submit(sendForm);
+  $('#newservice').submit(sendForm);
 
   // Se alguém faz login/logout
   firebase.auth().onAuthStateChanged((userData) => {
@@ -31,6 +29,7 @@ function runPage() {
             $('#editservice-subject').val(art.intro);
             $('#editservice-message').val(art.description);
           }
+
 
         });
 
@@ -53,7 +52,7 @@ function sendForm() {
   };
 
   // Salva dados no banco de dados
-  db.collection("services").doc(id)
+  db.collection("services")
     .update(editService)
 
     // Se deu certo, exibe feedback
@@ -67,8 +66,6 @@ function sendForm() {
       var msg = `<p class="danger">Ocorreu uma falha que impediu a alteração do seu serviço.</p><p class="danger">A equipe do site já foi avisada sobre a falha.</p><p>Por favor, tente mais tarde.</p><p><small>${error}</small></p>`;
       feedback(msg);
     });
-
-
 
   // Sai sem fazer mais nada
   return false;

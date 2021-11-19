@@ -1,6 +1,6 @@
 <article>
 
-    <h2>Cadastre-se </h2>
+    <h2>Complete seu cadastro </h2>
 
     <form method="POST" name="newuser" id="newuser">
 
@@ -29,12 +29,27 @@
 
         <p>
             <label for="newuser-phone">Telefone:</label>
-            <input type="text" name="newuser-phone" id="newuser-phone" required minlength="3" class="valid">
+            <input type="text" name="newuser-phone" id="newuser-phone" required minlength="11" class="valid" onkeypress="mascara(this, telefone)" maxlength="15">
         </p>
 
         <p>
             <label for="newuser-whatsapp">Whatsapp:</label>
-            <input type="text" name="newuser-whatsapp" id="newuser-whatsapp" required minlength="3" class="valid">
+            <input type="text" name="newuser-whatsapp" id="newuser-whatsapp" required minlength="11" class="valid" onkeypress="mascara(this, telefone)" maxlength="15">
+        </p>
+
+        <p>
+            <label for="newuser-zip">CEP:</label>
+            <input type="text" name="newuser-zip" id="newuser-zip" required minlength="9" class="valid" onkeypress="mascara(this, cep)" maxlength="9">
+        </p>
+
+        <p>
+            <label for="newuser-state">Estado:</label>
+            <input type="text" name="newuser-state" id="newuser-state" required minlength="3" class="valid">
+        </p>
+
+        <p>
+            <label for="newuser-city">Cidade:</label>
+            <input type="text" name="newuser-city" id="newuser-city" required minlength="3" class="valid">
         </p>
 
         <p>

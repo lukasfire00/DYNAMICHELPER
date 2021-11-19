@@ -38,6 +38,13 @@ function runApp() {
     }
   });
 
+  // Copia o telefone no Whatsapp se este está vazio
+  $(document).on('focus', '#newuser-whatsapp', () => {
+    if ($('#newuser-whatsapp').val() === '') {
+      $('#newuser-whatsapp').val($('#newuser-phone').val());
+    }
+  });
+
 }
 
 // Carrega uma página completa
@@ -95,7 +102,8 @@ function routerLink() {
   if (
     target == "_blank" ||
     href.substr(0, 7) == "http://" ||
-    href.substr(0, 8) == "https://"
+    href.substr(0, 8) == "https://" ||
+    href.substr(0, 9) == "mailto://"
   )
     return true;
 
@@ -137,7 +145,7 @@ function getSystemDate() {
 function closeModal() {
   modalName = $(this).parent().attr("id"); // Obtém o ID do pai do modal clicado
   $(`#${modalName}`).hide("fast"); // Oculta o pai do modal clicado
-  if(modalName == 'modalLogin') loadPage('home'); // Vai para a home se fez login
+  // if (modalName == 'modalLogin') loadPage('home'); // Vai para a home se fez login
   return false;
 }
 
@@ -169,9 +177,6 @@ function login() {
       // Armazena login no cookie
       setCookie('userData', userData);
 
-      // Checa perfil
-      checkProfile();
-
       // Se logou, exibe um modal cumprimentando o usuário
       var modalText = `<strong>Olá ${result.user.displayName}!</strong><br><br>Você já pode usar nosso conteúdo restrito...`;
       $("#modalLogin .modal-title").html("Bem-vinda(o)!");
@@ -182,6 +187,9 @@ function login() {
       setTimeout(() => {
         $("#modalLogin").hide("fast");
       }, 15000);
+
+      // Checa perfil
+      checkProfile();
 
     })
     .catch((error) => {
@@ -196,6 +204,8 @@ function logout() {
     .auth()
     .signOut()
     .then(() => {
+      // Expira o cookie
+      setCookie('userData', null, -1);
       // Após logout, retorna para a 'home'
       loadPage("home");
     });
@@ -235,7 +245,7 @@ function checkProfile() {
     if (doc.exists) {
       // Cadastro encontrado
       // console.log("Document data:", doc.data());
-      return true;
+      loadPage('home');
     } else {
       // Cadastro não encontrado
       // console.log("No such document!");
@@ -247,3 +257,36 @@ function checkProfile() {
 
 }
 
+
+
+
+
+
+function mascara(o, f) {
+  v_obj = o
+  v_fun = f
+  setTimeout("execmascara()", 1)
+}
+
+function execmascara() {
+  v_obj.value = v_fun(v_obj.value)
+}
+
+function cep(v) {
+  v = v.replace(/\D/g, "")                 //Remove tudo o que não é dígito
+  v = v.replace(/^(\d{5})(\d)/, "$1-$2") //Esse é tão fácil que não merece explicações
+  return v
+}
+
+function telefone(v) {
+  v = v.replace(/\D/g, "")                 //Remove tudo o que não é dígito
+  v = v.replace(/^(\d\d)(\d)/g, "($1) $2") //Coloca parênteses em volta dos dois primeiros dígitos
+  v = v.replace(/(\d{5})(\d)/, "$1-$2")    //Coloca hífen entre o quarto e o quinto dígitos
+  return v
+}
+
+function updateWs(fieldValue) {
+
+  $('#newuser-whatsapp').val(fieldValue);
+
+}
