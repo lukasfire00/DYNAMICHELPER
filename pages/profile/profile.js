@@ -61,11 +61,16 @@ function runPage() {
                             <a class="btn primary block" href="myservices">
                                 <i class="fas fa-address-card fa-fw"></i> Meus Serviços</a>
                         </p>
-
-                            <p>
+                        
+                        <p>
                                 <a class="btn primary block" href="editprofile">
                                     <i class="fas fa-address-card fa-fw"></i> Editar perfil</a>
                             </p>
+                            <p>
+                        <a class="btn primary block" href="newservice">
+                        <i class="fas fa-hands-helping"></i></i><span> Peça ajuda</span></a>
+
+                        </P>
                         </div>
                     </div>`;
 

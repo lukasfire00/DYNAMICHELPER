@@ -14,15 +14,23 @@ function runPage() {
 
 // Processa envio do formulário de contatos
 function sendForm() {
+ 
+  userId = JSON.parse(getCookie('userData')).uid;
+  
+  
+  
+  
+  
   // Obtém e sanitiza os campos preenchidos
   var newServices = {
     title: sanitizeString($("#newservice-title").val()),
     intro: sanitizeString($("#newservice-intro").val()),
     description: sanitizeString($("#newservice-description").val()),
     date: getSystemDate(),
-    uid: user.uid,
+    uid:   userId ,
     status: "ativo",
   };
+  
 
   // Salva dados no banco de dados
   db.collection("services")

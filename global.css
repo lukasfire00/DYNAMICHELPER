@@ -39,7 +39,7 @@ p {
 
 body {
   background-color: black;
-  background-image: url("img/background01.jpg");
+  background-image: url("img/bk.png");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -121,7 +121,7 @@ aside {
 header {
   display: flex;
   align-items: center;
-  background: rgb(13, 75, 93);
+  background: rgb(93, 45, 13);
   color: white;
   margin: 0.25rem;
   border: 3px double white;

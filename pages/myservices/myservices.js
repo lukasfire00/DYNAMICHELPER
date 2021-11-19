@@ -33,10 +33,13 @@ console.log(userData.uid);
                         // Armazena dados do artigo em 'art'
                         art = doc.data();
 
+                        var rndImg = Math.floor(Math.random() * 10);
+                        rndImg = "20" + rndImg;
+
                         // Monta lista de artigos
                         artList += `
 <div class="article">
-    <div class="article-img" style="background-image: url('img/users/${art.uid}.jpg')"></div>
+    <div class="article-img" style="background-image: url('https://picsum.photos/${rndImg}')"></div>
     <div class="article-content">
         <h3>${art.title}</h3>
         ${art.intro}

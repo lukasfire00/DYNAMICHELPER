@@ -47,7 +47,7 @@ function sendForm() {
   var editService = {
     title: sanitizeString($("#editservice-title").val()),
     subject: sanitizeString($("#editservice-subject").val()),
-    message: sanitizeString($("#editservice-message").val()),
+    description: sanitizeString($("#editservice-message").val()),
     // date: getSystemDate(),
     // status: "ativo",
   };
