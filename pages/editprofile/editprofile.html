@@ -22,12 +22,12 @@
 
         <p>
             <label for="editprofile-phone">Telefone:</label>
-            <input type="text" name="editprofile-phone" id="editprofile-phone" required minlength="11" class="valid" onkeypress="mascara(this, telefone)" maxlength="15">
+            <input type="text" name="editprofile-phone" id="editprofile-phone" required minlength="11" class="valid" onkeypress="mascara(this, telefone)" maxlength="17">
         </p>
 
         <p>
             <label for="editprofile-whatsapp">Whatsapp:</label>
-            <input type="text" name="editprofile-whatsapp" id="editprofile-whatsapp" required minlength="11" class="valid" onkeypress="mascara(this, telefone)" maxlength="15">
+            <input type="text" name="editprofile-whatsapp" id="editprofile-whatsapp" required minlength="11" class="valid" onkeypress="mascara(this, telefone)" maxlength="17">
         </p>
 
         <p>
@@ -36,8 +36,36 @@
         </p>
 
         <p>
-            <label for="editprofile-state">Estado:</label>
-            <input type="text" name="editprofile-state" id="editprofile-state" required minlength="3" class="valid">
+            <select id="editprofile-state" name="editprofile-state">
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+                <option value="EX">Estrangeiro</option>
+            </select>
         </p>
 
         <p>

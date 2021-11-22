@@ -50,3 +50,5 @@ function runPage() {
 function openArticle() {
     loadPage($(this).attr('data-route'));
 }
+
+
