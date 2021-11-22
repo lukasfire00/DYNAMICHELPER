@@ -56,3 +56,12 @@
     border-radius: 0 0.3rem 0.3rem 0;
   }
 }
+
+select{
+  font-family: inherit;
+  font-size: 0.8rem;
+  border: none;
+  background: orange;
+  padding: 0.6rem 1rem;
+  border-radius: 0.4rem;
+}
