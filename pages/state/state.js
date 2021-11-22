@@ -1,17 +1,53 @@
 // Inicializa variáveis
 var pageTitle = '';
 
+var serviceList = [];
+
+
 $(document).ready(runPage);
 
 // Aplicativo principal
 function runPage() {
 
+    const state = sanitizeString(location.search.replace('?', ''));
+
     // Detecta cliques nos services
     $(document).on('click', '.article', openArticle);
-    $('#search-state').change(searchState)
 
     // Altera o título da página
     setTitle(pageTitle);
+
+    db.collection('users')
+        .where('state', '==', state)
+        .onSnapshot((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+
+                user = doc.data();
+                console.log(user.state, doc.id);
+
+                db.collection('services')
+                    .where('uid', '==', doc.id)
+                    .onSnapshot((querySnapshot) => {
+                        querySnapshot.forEach((docService) => {
+                            var rndImg = Math.floor(Math.random() * 10);
+                            rndImg = "20" + rndImg;
+
+                            serviceList.push(docService.data());
+                        });
+
+                    });
+
+
+
+
+
+
+            });
+
+
+        });
+
+console.log(serviceList);
 
     // Obtendo todos os artigos do banco de dados
     db.collection("services")
@@ -50,12 +86,6 @@ function runPage() {
 // Abre o artigo completo ao clicar
 function openArticle() {
     loadPage($(this).attr('data-route'));
-}
-
-function searchState() {
-    var state = $(this).val()
-    loadPage(`state?${state}`)
-
 }
 
 

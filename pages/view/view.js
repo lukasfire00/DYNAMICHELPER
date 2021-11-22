@@ -73,7 +73,7 @@ function runPage() {
                                 </ul>
                                   
                                 <p>
-                                <a class="btn primary block" href="https://api.whatsapp.com/send?phone=${user.whatsapp}&text=${art.title}" target="_blank">
+                                <a class="btn primary block" href="https://api.whatsapp.com/send?phone=55${user.whatsapp}&text=${art.title}" target="_blank">
                                 <i class="fab fa-whatsapp"></i> Contato via Whatsapp</a>
                             </p>
     
