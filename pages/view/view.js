@@ -34,8 +34,6 @@ function runPage() {
                 art.brDate = getBrDate(art.date);   // Converte a data do artigo em pt-br
                 setTitle(art.title);                // Altera o título da página
 
-
-
                 // Torna o id do artigo global
                 commentArticle = doc.id;
 
@@ -55,6 +53,8 @@ function runPage() {
                             .onSnapshot((doc) => {
                                 var user = doc.data();
 
+                                var whatsapp = user.whatsapp.replace(/\D+/g, '');
+
                                 var uAppProfile = `&nbsp;
                         <div class="card card-table">
                             <h3 class="card-title">Perfil de ${user.name}</h3>
@@ -73,7 +73,7 @@ function runPage() {
                                 </ul>
                                   
                                 <p>
-                                <a class="btn primary block" href="https://api.whatsapp.com/send?phone=55${user.whatsapp}&text=${art.title}" target="_blank">
+                                <a class="btn primary block" href="https://api.whatsapp.com/send?phone=55${whatsapp}&text=${art.title}" target="_blank">
                                 <i class="fab fa-whatsapp"></i> Contato via Whatsapp</a>
                             </p>
     

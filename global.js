@@ -14,6 +14,8 @@ function runApp() {
 
   loadPage("home"); // Carrega página inicial
 
+  $(document).on('change', '#search-state', searchState);
+
   $(document).on("click", "a", routerLink); // Monitora cliques nos links
   $(document).on("click", ".modal", closeModal); // Monitora cliques no modal
 
@@ -286,7 +288,13 @@ function telefone(v) {
 }
 
 function updateWs(fieldValue) {
-
   $('#newuser-whatsapp').val(fieldValue);
-
 }
+
+function searchState() {
+  var state = sanitizeString($(this).val())
+  if (state === '') return false;
+  loadPage(`state?${state}`)
+}
+
+

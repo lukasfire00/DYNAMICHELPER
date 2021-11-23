@@ -8,7 +8,6 @@ function runPage() {
 
     // Detecta cliques nos services
     $(document).on('click', '.article', openArticle);
-    $('#search-state').change(searchState)
 
     // Altera o título da página
     setTitle(pageTitle);
@@ -51,11 +50,3 @@ function runPage() {
 function openArticle() {
     loadPage($(this).attr('data-route'));
 }
-
-function searchState() {
-    var state = $(this).val()
-    loadPage(`state?${state}`)
-
-}
-
-
